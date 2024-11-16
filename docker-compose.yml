@@ -1,0 +1,14 @@
+services:
+  date:
+    image: alexkoshelev/test-result-date
+    build:
+      dockerfile: date.dockerfile
+  result:
+    image: alexkoshelev/test-result
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - "DATE_SERVER_HOST=http://date:3005"
+    depends_on:
+      - date
